@@ -1,5 +1,4 @@
 using System;
-using ListenToMe.Constants;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.IO;
 
@@ -61,7 +60,7 @@ namespace ListenToMe.Model
         }
         public string Artist
         {
-            get { return String.IsNullOrEmpty(_artist) ? MediaConstants.UNKNOWN_ARTIST : _artist; }
+            get { return String.IsNullOrEmpty(_artist) ? "Artist Unknown" : _artist; }
             set { SetProperty(ref _artist, value); }
         }
 
@@ -73,7 +72,7 @@ namespace ListenToMe.Model
 
         public string Type
         {
-            get { return String.IsNullOrEmpty(_type) ? MediaConstants.UNKNOWN_TYPE : _type; }
+            get { return String.IsNullOrEmpty(_type) ? "Type Unknown" : _type; }
             set { SetProperty(ref _artist, value); }
         }
 
