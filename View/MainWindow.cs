@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using CommunityToolkit.Mvvm.Messaging;
 using ListenToMe.ViewModel;
 
@@ -14,14 +13,14 @@ namespace ListenToMe
         {
             this.InitializeComponent();
 
-            WeakReferenceMessenger.Default.Register<OpenWindowMessage>(this, (r,m) =>
+            WeakReferenceMessenger.Default.Register<OpenWindowMessage>(this, (r, m) =>
             {
                 var fw = new PlayWindow(m.Value);
 
                 fw.ShowDialog();
             });
 
-			DataContext = new MediaListViewModel();
+            DataContext = new MediaListViewModel();
         }
     }
 }

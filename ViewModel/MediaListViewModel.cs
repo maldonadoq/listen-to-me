@@ -21,40 +21,43 @@ namespace ListenToMe.ViewModel
 
     public class MediaListViewModel : ObservableObject
     {
-        // Lista de mediaas.
+        // Media list.
         public ObservableCollection<Media> MediaList { get; set; }
 
-        // Media selecionada.
+        // Media sekected.
         private Media? _selectedMedia;
 
-        // Objeto que lida com o comando novo.
+        // Object that handles the new command.
         public RelayCommand NewMedia { get; set; }
 
-        // Objeto que lida com o comando deletar.
+        // Object that handles the delete command.
         public RelayCommand DeleteMedia { get; set; }
 
-        // Objeto que lida com o comando play.
+        // Object that handles the play command.
         public RelayCommand PlayMedia { get; set; }
 
         public Media? SelectedMedia
         {
             get { return _selectedMedia; }
-            set { SetProperty(ref _selectedMedia, value);
-                    DeleteMedia.NotifyCanExecuteChanged();
-                    PlayMedia.NotifyCanExecuteChanged(); }
+            set
+            {
+                SetProperty(ref _selectedMedia, value);
+                DeleteMedia.NotifyCanExecuteChanged();
+                PlayMedia.NotifyCanExecuteChanged();
+            }
         }
 
         public MediaListViewModel()
         {
-            this.NewMedia = new RelayCommand(NewCMD);
-            this.PlayMedia = new RelayCommand(PlayCMD, CanPlayOrDeleteCMD);
-            this.DeleteMedia = new RelayCommand(DeleteCMD, CanPlayOrDeleteCMD);
+            this.NewMedia = new RelayCommand(NewCommand);
+            this.PlayMedia = new RelayCommand(PlayCommand, CanPlayOrDeleteCommand);
+            this.DeleteMedia = new RelayCommand(DeleteCommand, CanPlayOrDeleteCommand);
             this.MediaList = new ObservableCollection<Media>();
             LoadMediaList();
         }
 
         /// <summary>
-        /// Carrega a lista de midias utilizando os arquivos dos diretorios Music e Video do computador.
+        /// Load the media list using files from the Music and Video directories on the computer.
         /// </summary>
         private void LoadMediaList()
         {
@@ -62,10 +65,10 @@ namespace ListenToMe.ViewModel
             DirectoryInfo videosPath = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos));
             List<FileInfo> listPaths = new List<FileInfo>();
 
-            listPaths.AddRange(musicsPath.GetFilesByExtensions(".mp3",".mpg",".mpeg",".mp4"));
-            listPaths.AddRange(videosPath.GetFilesByExtensions(".mp3",".mpg",".mpeg",".mp4"));
+            listPaths.AddRange(musicsPath.GetFilesByExtensions(".mp3", ".mpg", ".mpeg", ".mp4"));
+            listPaths.AddRange(videosPath.GetFilesByExtensions(".mp3", ".mpg", ".mpeg", ".mp4"));
 
-            foreach(FileInfo path in listPaths)
+            foreach (FileInfo path in listPaths)
             {
                 this.MediaList.Add(new Media(path.FullName));
             }
@@ -77,20 +80,20 @@ namespace ListenToMe.ViewModel
         }
 
         #region Command Handling
-        private void NewCMD()
+        private void NewCommand()
         {
             Media media;
             OpenFileDialog openFileDialog = new OpenFileDialog();
-			openFileDialog.Filter = "Media files (*.mp3;*.mpg;*.mpeg;*.mp4)|*.mp3;*.mpg;*.mpeg;*.mp4|All files (*.*)|*.*";
-			if(openFileDialog.ShowDialog() == true)
-			{
+            openFileDialog.Filter = "Media files (*.mp3;*.mpg;*.mpeg;*.mp4)|*.mp3;*.mpg;*.mpeg;*.mp4|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
                 media = new Media(openFileDialog.FileName);
                 this.MediaList.Add(media);
                 this._selectedMedia = media;
-			}
+            }
         }
 
-        private void DeleteCMD()
+        private void DeleteCommand()
         {
             if (this.SelectedMedia != null)
                 this.MediaList.Remove(this.SelectedMedia);
@@ -101,7 +104,7 @@ namespace ListenToMe.ViewModel
                 this.SelectedMedia = null;
         }
 
-        private void PlayCMD()
+        private void PlayCommand()
         {
             if (this.SelectedMedia != null)
             {
@@ -111,7 +114,7 @@ namespace ListenToMe.ViewModel
             }
         }
 
-        private bool CanPlayOrDeleteCMD()
+        private bool CanPlayOrDeleteCommand()
         {
             return this.SelectedMedia != null;
         }

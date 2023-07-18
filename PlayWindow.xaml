@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ListenToMe" Height="400" Width="800" WindowStyle="ToolWindow"
         MinWidth="300" SizeToContent="WidthAndHeight">
-    <Grid MouseWheel="VolumeMouseWheel">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

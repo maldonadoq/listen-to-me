@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Messaging;
 using ListenToMe.ViewModel;
 using System;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Threading;
 using System.Windows.Controls;
 
@@ -18,7 +17,7 @@ namespace ListenToMe
         {
             this.InitializeComponent();
 
-            WeakReferenceMessenger.Default.Register<CloseWindowMessage>(this, (r,m) =>
+            WeakReferenceMessenger.Default.Register<CloseWindowMessage>(this, (r, m) =>
             {
                 this.Hide();
             });
@@ -44,77 +43,68 @@ namespace ListenToMe
             };
         }
 
-        #region Volume Controller
-        /// <summary>
-        /// Controla o volume utilizando o scroll do mouse.
-        /// </summary>
-        private void VolumeMouseWheel(object sender, MouseWheelEventArgs e)
-		{
-			MediaElement.Volume += (e.Delta > 0) ? 0.1 : -0.1;
-		}
-        #endregion
 
         #region Slider Time Controller
 
         /// <summary>
-        /// Define o relogio para controle do tempo da midia.
+        /// Sets the clock for media time tracking.
         /// </summary>
         private void InitializeMidia()
         {
-			timer.Interval = TimeSpan.FromSeconds(1);
-			timer.Tick += TimerTick;
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += TimerTick;
         }
 
         /// <summary>
-        /// Inicia o relogio, e inicia a midia automaticamento.
+        /// Starts the clock, and starts the media automatically.
         /// </summary>
         private void MediaOpened(object sender, RoutedEventArgs e)
-		{
+        {
             if (MediaElement.LoadedBehavior == MediaState.Play)
             {
                 MediaElement.LoadedBehavior = MediaState.Manual;
                 MediaElement.Play();
             }
             this.timer.Start();
-		}
+        }
 
         /// <summary>
-        /// Atualiza o slider mostrando o tempo da midia.
+        /// Update slide showing media time.
         /// </summary>
         private void TimerTick(object? sender, EventArgs? e)
-		{
-			if((MediaElement.Source != null) && (MediaElement.NaturalDuration.HasTimeSpan) && (!isUsingSlider))
-			{
-				SliderProgress.Minimum = 0;
-				SliderProgress.Maximum = MediaElement.NaturalDuration.TimeSpan.TotalSeconds;
-				SliderProgress.Value = MediaElement.Position.TotalSeconds;
-			}
-		}
+        {
+            if ((MediaElement.Source != null) && (MediaElement.NaturalDuration.HasTimeSpan) && (!isUsingSlider))
+            {
+                SliderProgress.Minimum = 0;
+                SliderProgress.Maximum = MediaElement.NaturalDuration.TimeSpan.TotalSeconds;
+                SliderProgress.Value = MediaElement.Position.TotalSeconds;
+            }
+        }
 
         /// <summary>
-        /// Marca que o usuario comecou a mover a posicao do slider.
+        /// Marks that the user has started to move the position of the slider.
         /// </summary>
 		private void SliderDragStarted(object sender, DragStartedEventArgs e)
-		{
-			isUsingSlider = true;
-		}
+        {
+            isUsingSlider = true;
+        }
 
         /// <summary>
-        /// O usuario terminou de mover a posicao do slider, atualiza a posicao da midia.
+        /// User finished moving slide position, updates media position.
         /// </summary>
 		private void SliderDragCompleted(object sender, DragCompletedEventArgs e)
-		{
-			isUsingSlider = false;
-			MediaElement.Position = TimeSpan.FromSeconds(SliderProgress.Value);
-		}
+        {
+            isUsingSlider = false;
+            MediaElement.Position = TimeSpan.FromSeconds(SliderProgress.Value);
+        }
 
         /// <summary>
-        /// Atualiza a label que exibe o tempo atual da midia.
+        /// Updates the label that displays the current media time.
         /// </summary>
 		private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-		{
-			ProgressStatus.Text = TimeSpan.FromSeconds(SliderProgress.Value).ToString(@"hh\:mm\:ss");
-		}
+        {
+            ProgressStatus.Text = TimeSpan.FromSeconds(SliderProgress.Value).ToString(@"hh\:mm\:ss");
+        }
         #endregion
     }
 }

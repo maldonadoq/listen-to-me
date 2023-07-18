@@ -1,10 +1,8 @@
 using System;
-using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 using ListenToMe.Model;
-using Microsoft.Win32;
 
 namespace ListenToMe.ViewModel
 {
@@ -29,13 +27,13 @@ namespace ListenToMe.ViewModel
         public PlayMediaViewModel(Media media)
         {
             SelectedMedia = media;
-            Play = new RelayCommand(PlayCMD);
-            Pause = new RelayCommand(PauseCMD);
-            Stop = new RelayCommand(StopCMD);
+            Play = new RelayCommand(PlayCommand);
+            Pause = new RelayCommand(PauseCommand);
+            Stop = new RelayCommand(StopCommand);
         }
 
         #region Command Handling
-        private void PlayCMD()
+        private void PlayCommand()
         {
             if (PlayEvent != null)
             {
@@ -44,7 +42,7 @@ namespace ListenToMe.ViewModel
             }
         }
 
-        private void PauseCMD()
+        private void PauseCommand()
         {
             if (PauseEvent != null)
             {
@@ -53,7 +51,7 @@ namespace ListenToMe.ViewModel
             }
         }
 
-        private void StopCMD()
+        private void StopCommand()
         {
             if (StopEvent != null)
             {

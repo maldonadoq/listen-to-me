@@ -1,8 +1,6 @@
 using System;
-using TagLib;
 using ListenToMe.Constants;
 using CommunityToolkit.Mvvm.ComponentModel;
-using TagLib.Id3v2;
 using System.IO;
 
 namespace ListenToMe.Model
@@ -56,7 +54,7 @@ namespace ListenToMe.Model
             get { return _source; }
             set { SetProperty(ref _source, value); }
         }
-        public string Title
+        public string? Title
         {
             get { return String.IsNullOrEmpty(_title) ? _name : _title; }
             set { SetProperty(ref _title, value); }
