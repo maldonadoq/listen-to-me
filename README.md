@@ -27,6 +27,9 @@ $ dotnet run
   - ![Alt text](./Images/MainWindow.png "Main")
 - Play Window
   - ![Alt text](./Images/PlayWindow.png "Play")
+
+## Video
+- https://drive.google.com/file/d/1C6Xwh9ntdo6I82maLLdwau4nmc4bcJkM/view?usp=sharing
   
 ## Contributors
 - [Jesamin Melissa Zevallos Quispe](https://github.com/Jesamin-30)
