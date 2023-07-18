@@ -14,6 +14,8 @@ namespace ListenToMe.Model
         private string? _title;
         private string? _artist;
         private string? _duration;
+        private string? _type;
+        private string? _name;
 
         public Media(string path)
         {
@@ -24,24 +26,23 @@ namespace ListenToMe.Model
 
         private void LoadMediaInfo()
         {
-            TagLib.File? file = null;
-            FileInfo? fileInfo = null;
-
             try
             {
+                TagLib.File? file = null;
+                FileInfo? fileInfo = null;
+
                 file = TagLib.File.Create(Path);
                 fileInfo = new FileInfo(Path);
+
+                this._title = file.Tag.Title;
+                this._artist = file.Tag.FirstAlbumArtist;
+                this._duration = file.Properties.Duration.ToString(@"hh\:mm\:ss");
+                this._type = fileInfo.Extension;
+                this._name = fileInfo.Name.Replace(_type, ""); ;
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Error creating media, exception: {e}");
-            }
-
-            if (file != null)
-            {
-                this._title = file.Tag.Title;
-                this._artist = file.Tag.FirstAlbumArtist;
-                this._duration = file.Properties.Duration.ToString(@"hh\:mm\:ss");
             }
         }
 
@@ -57,7 +58,7 @@ namespace ListenToMe.Model
         }
         public string Title
         {
-            get { return String.IsNullOrEmpty(_title) ? MediaConstants.UNKNOWN_TITLE : _title; }
+            get { return String.IsNullOrEmpty(_title) ? _name : _title; }
             set { SetProperty(ref _title, value); }
         }
         public string Artist
@@ -70,6 +71,12 @@ namespace ListenToMe.Model
         {
             get { return _duration ?? TimeSpan.Zero.ToString(@"hh\:mm\:ss"); }
             set { SetProperty(ref _duration, value); }
+        }
+
+        public string Type
+        {
+            get { return String.IsNullOrEmpty(_type) ? MediaConstants.UNKNOWN_TYPE : _type; }
+            set { SetProperty(ref _artist, value); }
         }
 
         public Object Clone()

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListenToMe"
         mc:Ignorable="d"
-        Title="{Binding SelectedMedia.Title}" Height="400" Width="400" WindowStyle="ToolWindow"
+        Title="ListenToMe" Height="400" Width="800" WindowStyle="ToolWindow"
         MinWidth="300" SizeToContent="WidthAndHeight">
     <Grid MouseWheel="VolumeMouseWheel">
         <Grid.RowDefinitions>
@@ -17,36 +17,20 @@
         <MediaElement   Source="{Binding SelectedMedia.Source}" Name="MediaElement" 
                         Grid.Row="1" LoadedBehavior="Play" Stretch="None" MediaOpened="MediaOpened" />
 
-        <StatusBar Grid.Row="2">
-            <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </StatusBar.ItemsPanel>
-
+        <StatusBar Grid.Row="2" Background="#9aa5e1">
             <StatusBarItem>
-                <Button Command="{Binding Play}">
-                    <Image Source="E:\University\Microsoft\ListenToMe\Images\play.png" Width="24"/>
+                <Button Command="{Binding Play}" Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="E:\University\Microsoft\ListenToMe\Images\play.png" Width="20"/>
                 </Button>
             </StatusBarItem>
             <StatusBarItem Grid.Column="1">
-                <Button Command="{Binding Pause}">
-                    <Image Source="E:\University\Microsoft\ListenToMe\Images\pause.png" Width="24"/>
+                <Button Command="{Binding Pause}" Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="E:\University\Microsoft\ListenToMe\Images\pause.png" Width="20"/>
                 </Button>
             </StatusBarItem>
             <StatusBarItem Grid.Column="2">
-                <Button Command="{Binding Stop}">
-                    <Image Source="E:\University\Microsoft\ListenToMe\Images\stop.png" Width="24"/>
+                <Button Command="{Binding Stop}" Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="E:\University\Microsoft\ListenToMe\Images\stop.png" Width="20"/>
                 </Button>
             </StatusBarItem>
             
@@ -56,7 +40,7 @@
                 <TextBlock Name="ProgressStatus">00:00:00</TextBlock>
             </StatusBarItem>
             <StatusBarItem Grid.Column="5" HorizontalContentAlignment="Stretch">
-                <Slider Name="SliderProgress" Thumb.DragStarted="SliderDragStarted" Thumb.DragCompleted="SliderDragCompleted" ValueChanged="SliderValueChanged" />
+                <Slider Name="SliderProgress" Thumb.DragStarted="SliderDragStarted" Thumb.DragCompleted="SliderDragCompleted" ValueChanged="SliderValueChanged" Foreground="Green" />
             </StatusBarItem>
         </StatusBar>
     </Grid>

@@ -5,27 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListenToMe"
         mc:Ignorable="d"
-        Title="ListenToMe" Height="400" Width="850">
-    <Grid>
+        Title="ListenToMe" Height="400" Width="820">
+    <Grid Background="#444444">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="3" Padding="3" Height="25"
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 0">
+            <Button Padding="3" Height="25" Background="#1fdf64"
                 CommandParameter="{Binding}"
                 Command="{Binding NewMedia}"
-                Content="Add Media"/>
-            <Button Margin="3" Padding="3" Height="25"
-                CommandParameter="{Binding}"
-                Command="{Binding DeleteMedia}"
-                Content="Delete"/>
-            <Button Margin="3" Padding="3" Height="25"
+                Content="Add Music/Video"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
+            <Button Padding="3" Margin="10 0" Height="25" Background="#1fdf64"
                 CommandParameter="{Binding}"
                 Command="{Binding PlayMedia}"
-                Content="Play"/>
+                Content="Play Media"/>
+            <Button Margin="3" Padding="3" Height="25" Background="#f9982b"
+                CommandParameter="{Binding}"
+                Command="{Binding DeleteMedia}"
+                Content="Delete Media"/>
         </StackPanel>
+
+        <Separator Height="1" Grid.Row="10" Background="White" Margin="0 -1 0 10" />
 
         <ScrollViewer Grid.Row="1"
                       HorizontalScrollBarVisibility="Visible"
@@ -34,11 +39,19 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             SelectedItem="{Binding SelectedMedia}">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#9aa5e1" />
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.Resources>
+
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
-                    <DataGridTextColumn Header="Artist" Binding="{Binding Artist}"/>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}"/>
-                    <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                    <DataGridTextColumn Header="Title" Width="350" Binding="{Binding Title}"/>
+                    <DataGridTextColumn Header="Artist" Width="200" Binding="{Binding Artist}"/>
+                    <DataGridTextColumn Header="Duration" Width="150" Binding="{Binding Duration}"/>
+                    <DataGridTextColumn Header="Type" Width="100" Binding="{Binding Type}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
