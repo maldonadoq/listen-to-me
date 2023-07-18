@@ -19,7 +19,7 @@ $ dotnet run
 ## Screenshots
 - Main Window
   - ![Alt text](./images/MainWindow.png "Main")
-  - ![View app](./images/MainWindow.png)
+  - ![Alt text](./images/MainWindow.png)
 - Play Window
   - ![Alt text](./images/PlayWindow.png "Play")
   
