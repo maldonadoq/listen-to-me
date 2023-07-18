@@ -18,10 +18,9 @@ $ dotnet run
 
 ## Screenshots
 - Main Window
-  - ![Alt text](./images/MainWindow.png "Main")
-  - ![Alt text](./images/MainWindow.png)
+  - ![Alt text](./Images/MainWindow.png "Main")
 - Play Window
-  - ![Alt text](./images/PlayWindow.png "Play")
+  - ![Alt text](./Images/PlayWindow.png "Play")
   
 ## Contributors
 - [Jesamin Melissa Zevallos Quispe](https://github.com/Jesamin-30)
