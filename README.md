@@ -1,8 +1,14 @@
 # ListenToMe
 Music player developed on .Net, using the MVVM architecture.
 
-- Entities
+- Model
   - Media (Music or Video)
+- View
+  - Main Window
+  - Play Window
+- ViewModel
+  - Media List
+  - Play Media
 
 ## Run
 ```console
